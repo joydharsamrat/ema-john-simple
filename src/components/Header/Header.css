@@ -5,15 +5,32 @@
     align-items: center;
     justify-content: space-between;
     padding: 0px 140px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .header a {
-    color: #FFFFFF;
+
     text-decoration: none;
     font-size: 17px;
     margin-left: 36px;
+    color: #FFFFFF;
 }
 
 .header a:hover {
+    color: orange;
+}
+
+.btn-logout {
+    font-size: 17px;
+    margin-left: 36px;
+    color: #FFFFFF;
+    background-color: #1C2B35;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-logout:hover {
     color: orange;
 }

@@ -1,13 +1,62 @@
-import logo from './logo.svg';
+
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
-import Header from './components/Header/Header';
+import About from './components/About/About';
+import Inventory from './components/Inventory/Inventory';
+import LogIn from './components/LogIn/LogIn';
+import Orders from './components/Orders/Orders';
+import Shipping from './components/Shipping/Shipping';
 import Shop from './components/Shop/Shop';
+import SignUp from './components/SignUp/SignUp';
+import Main from './layouts/Main';
+import { productAndCartLoader } from './loaders/productAndCartLoader';
+import PrivateRoutes from './routes/PrivateRoutes';
+
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Main></Main>,
+      children: [
+        {
+          path: '/',
+          loader: () => fetch('products.json'),
+          element: <Shop></Shop>
+        },
+        {
+          path: '/orders',
+          loader: productAndCartLoader,
+          element: <Orders></Orders>
+        },
+        {
+          path: '/inventory',
+          element: <Inventory></Inventory>
+        },
+        {
+          path: '/shipping',
+          element: <PrivateRoutes><Shipping></Shipping></PrivateRoutes>
+        },
+        {
+          path: 'about',
+          element: <About></About>
+        },
+        {
+          path: '/login',
+          element: <LogIn></LogIn>
+        },
+        {
+          path: '/signup',
+          element: <SignUp></SignUp>
+        }
+      ]
+
+    },
+
+  ]);
   return (
     <div >
-      <Header></Header>
-      <Shop></Shop>
+      <RouterProvider router={router}></RouterProvider>
     </div>
   );
 }
